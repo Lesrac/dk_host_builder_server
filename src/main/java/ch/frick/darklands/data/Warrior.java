@@ -27,8 +27,10 @@ public class Warrior implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	private String name;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KINDRED_ID")
+  @JoinColumn(name="KINDRED_ID", nullable = false)
 	private Kindred kindred;
 	
 	private int hands;
@@ -41,12 +43,12 @@ public class Warrior implements Serializable{
 	
 	private int cost;
 	
-	private int spelling;
+	private String spelling;
 	
 	private boolean sellsword;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KIN_ID")
+  @JoinColumn(name="KIN_ID", nullable = false)
 	private Kin kin;
 	
 	@OneToOne(fetch=FetchType.LAZY)
@@ -61,15 +63,15 @@ public class Warrior implements Serializable{
 	private List<Equipment> equipments;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="WARRIOR_CLASS_ID")
+  @JoinColumn(name="WARRIOR_CLASS_ID", nullable = false)
 	private WarriorClass warriorClass;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="PRIVILEGE_ID")
+  @JoinColumn(name="PRIVILEGE_ID", nullable = false)
 	private Privilege privilege;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="ACUITY_ID")
+  @JoinColumn(name="ACUITY_ID", nullable = false)
 	private Acuity acuity;
 
 	public long getId() {
@@ -78,6 +80,14 @@ public class Warrior implements Serializable{
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Kindred getKindred() {
@@ -128,11 +138,11 @@ public class Warrior implements Serializable{
 		this.cost = cost;
 	}
 
-	public int getSpelling() {
+	public String getSpelling() {
 		return spelling;
 	}
 
-	public void setSpelling(int spelling) {
+	public void setSpelling(String spelling) {
 		this.spelling = spelling;
 	}
 

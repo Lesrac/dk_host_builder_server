@@ -34,11 +34,11 @@ public class Equipment implements Serializable{
 	private int cost;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="EQUIPMENT_CLASS_ID")
+  @JoinColumn(name="EQUIPMENT_CLASS_ID", nullable = false)
 	private EquipmentClass equipmentClass;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="EQUIPMENT_TYPE_ID")
+  @JoinColumn(name="EQUIPMENT_TYPE_ID", nullable = false)
 	private EquipmentType equipmentType;
 	
 	@ManyToMany

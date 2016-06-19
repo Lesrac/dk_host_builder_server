@@ -26,7 +26,7 @@ public class Realm implements Serializable{
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KINDRED_ID")
+  @JoinColumn(name="KINDRED_ID", nullable = false)
 	private Kindred kindred;
 
 	public long getId() {
