@@ -47,8 +47,8 @@ public class KindredService {
 	@GET
 	@Path("/{param}")
 	@Produces("application/json")
-	public Response getKindredById(@PathParam("param") long id) throws JsonProcessingException{
-		if(id < 1){
+	public Response getKindredById(@PathParam("param") Long id) throws JsonProcessingException{
+		if(id == null || id < 1){
 			return Response.serverError().build();
 		}
 		Kindred kindred = kindredDAO.getById(id);

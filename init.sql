@@ -50,6 +50,14 @@ INSERT INTO Profile
   (id, pace, skill, might, constitution, fortitude, authority, temper)
 VALUES (1, 6, 87, 73, 66, 96, 97, 86);
 
+INSERT INTO Profile
+  (id, pace, skill, might, constitution, fortitude, authority, temper)
+VALUES (2, 6, 81, 66, 54, 92, 91, 72);
+
 INSERT INTO Warrior
   (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kin_id, kindred_id, privilege_id, warrior_class_id, profile_id)
 VALUES (1, 'Belech', 560, 2, 80, false, 'BEL-ekh', 1, 1, 1, 1, 1, 1, 1, 1);
+
+INSERT INTO Warrior
+  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kin_id, kindred_id, privilege_id, warrior_class_id, profile_id)
+VALUES (2, 'Scion of Baalor', 394, 2, 80, false, 'SEYE-on of BAL-or', 1, 1, 1, 1, 1, 1, 1, 2);

@@ -23,7 +23,7 @@ import javax.persistence.NamedQuery;
 public class Equipment implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String name;
 	
@@ -48,11 +48,11 @@ public class Equipment implements Serializable{
       inverseJoinColumns=@JoinColumn(name="EQUIPMENTRULE_ID", referencedColumnName="ID"))
 	private List<EquipmentRule> equipmentRules;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

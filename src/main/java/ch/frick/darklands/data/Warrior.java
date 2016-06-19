@@ -19,13 +19,14 @@ import javax.persistence.OneToOne;
 @SuppressWarnings("serial")
 @Entity
 @NamedQueries({
-	@NamedQuery(name="warrior.all", query="select w from Warrior w")
+	@NamedQuery(name="warrior.all", query="select w from Warrior w"),
+	@NamedQuery(name="warrior.byKindred", query="select w from Warrior w where w.kindred.id = :kindred_id")
 }) 
 public class Warrior implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String name;
 	
@@ -74,11 +75,11 @@ public class Warrior implements Serializable{
   @JoinColumn(name="ACUITY_ID", nullable = false)
 	private Acuity acuity;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

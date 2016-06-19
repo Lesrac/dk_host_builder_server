@@ -21,7 +21,7 @@ public class Kin implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
 	private String name;
 	
@@ -29,11 +29,11 @@ public class Kin implements Serializable{
   @JoinColumn(name="KINDRED_ID", nullable = false)
 	private Kindred kindred;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
