@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import ch.frick.darklands.daos.WarriorDAO;
-import ch.frick.darklands.data.Kindred;
+import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
+import ch.frick.darklands.data.WarriorClass;
 
 public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements WarriorDAO {
 
@@ -46,6 +47,24 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 		TypedQuery<Warrior> q = em.createNamedQuery("warrior.byKindred", Warrior.class);
 		q.setParameter("kindred_id", kindred_id);
 		List<Warrior> find = q.getResultList();
+		em.close();
+		return find;
+	}
+
+	@Override
+	public List<WarriorClass> getWarriorClasses() {
+		EntityManager em = factory.createEntityManager();
+		TypedQuery<WarriorClass> q = em.createNamedQuery("warriorClass.all", WarriorClass.class);
+		List<WarriorClass> find = q.getResultList();
+		em.close();
+		return find;
+	}
+
+	@Override
+	public List<Token> getTokens() {
+		EntityManager em = factory.createEntityManager();
+		TypedQuery<Token> q = em.createNamedQuery("token.all", Token.class);
+		List<Token> find = q.getResultList();
 		em.close();
 		return find;
 	}
