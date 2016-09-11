@@ -16,7 +16,7 @@
 	</filter-mapping>
 
 	<servlet>
-		<servlet-name>kindred-serlvet</servlet-name>
+		<servlet-name>kindred-servlet</servlet-name>
 		
 		<servlet-class>
         	org.glassfish.jersey.servlet.ServletContainer
@@ -29,7 +29,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>kindred-serlvet</servlet-name>
+		<servlet-name>kindred-servlet</servlet-name>
 		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 

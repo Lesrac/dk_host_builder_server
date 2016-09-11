@@ -30,7 +30,7 @@ public class Token implements Serializable{
       name="WARRIOR_TOKEN",
       joinColumns=@JoinColumn(name="TOKEN_ID", referencedColumnName="ID"),
       inverseJoinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"))
-	private List<Warrior> warriorTokens;
+	private List<Warrior> warriors;
 
 	public Long getId() {
 		return id;

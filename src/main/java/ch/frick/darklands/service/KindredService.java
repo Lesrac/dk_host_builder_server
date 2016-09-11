@@ -36,7 +36,7 @@ public class KindredService {
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	public Response getAllKindreds(@PathParam("param") String msg) throws JsonProcessingException{
+	public Response getAllKindreds() throws JsonProcessingException{
 		List<Kindred> allKindreds = kindredDAO.getAll();
 		LOGGER.debug("Get All Kindreds: " + allKindreds.size());
 		ObjectMapper mapper = new ObjectMapper();

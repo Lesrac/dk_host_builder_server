@@ -74,6 +74,9 @@ public class Warrior implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="ACUITY_ID", nullable = false)
 	private Acuity acuity;
+	
+	@ManyToMany(mappedBy="warriors")
+	private List<Token> tokens;
 
 	public Long getId() {
 		return id;
@@ -201,6 +204,10 @@ public class Warrior implements Serializable{
 
 	public void setAcuity(Acuity acuity) {
 		this.acuity = acuity;
+	}
+
+	public List<Token> getTokens() {
+		return tokens;
 	}
 	
 }
