@@ -1,6 +1,8 @@
 package ch.frick.darklands.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,6 +26,10 @@ public class Kindred implements Serializable{
 	private Long id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy="kindred")
+	@JsonBackReference
+	private List<Warrior> warriors = new ArrayList<Warrior>();
 
 	public Long getId() {
 		return id;
@@ -37,6 +46,13 @@ public class Kindred implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public List<Warrior> getWarriors() {
+		return warriors;
+	}
+
+	public void setWarriors(List<Warrior> warriors) {
+		this.warriors = warriors;
+	}
 	
 }

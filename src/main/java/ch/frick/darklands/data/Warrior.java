@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @SuppressWarnings("serial")
 @Entity
 @NamedQueries({
@@ -32,6 +34,7 @@ public class Warrior implements Serializable{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="KINDRED_ID", nullable = false)
+	@JsonManagedReference
 	private Kindred kindred;
 	
 	private int hands;
@@ -208,6 +211,10 @@ public class Warrior implements Serializable{
 
 	public List<Token> getTokens() {
 		return tokens;
+	}
+
+	public void setTokens(List<Token> tokens) {
+		this.tokens = tokens;
 	}
 	
 }

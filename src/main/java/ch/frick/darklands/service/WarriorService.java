@@ -92,10 +92,10 @@ public class WarriorService {
 	@Produces("application/json")
 	public Response getWarriorsByToken(@Context UriInfo uriInfo) throws JsonProcessingException {
 		LOGGER.debug("Get Warrios by Token");
-		MultivaluedMap<String, String> helo = uriInfo.getQueryParameters();
+		MultivaluedMap<String, String> tokenMap = uriInfo.getQueryParameters();
 		List<String> params = new ArrayList<String>();
-		for (String key : helo.keySet()) {
-			params.add(helo.get(key).get(0));
+		for (String key : tokenMap.keySet()) {
+			params.add(tokenMap.get(key).get(0));
 		}
 
 		List<Warrior> filtered = warriorDAO.getAll().stream()
