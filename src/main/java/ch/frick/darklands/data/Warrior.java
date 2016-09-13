@@ -2,6 +2,7 @@ package ch.frick.darklands.data;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -51,9 +53,12 @@ public class Warrior implements Serializable{
 	
 	private boolean sellsword;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KIN_ID", nullable = false)
-	private Kin kin;
+	@ManyToMany(fetch=FetchType.LAZY)
+  @JoinTable(
+  		name="WARRIOR_KIN", 
+  				joinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"),
+  	      inverseJoinColumns=@JoinColumn(name="KIN_ID", referencedColumnName="ID"))
+	private Set<Kin> kin;
 	
 	@OneToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="PROFILE_ID")
@@ -77,6 +82,9 @@ public class Warrior implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
   @JoinColumn(name="ACUITY_ID", nullable = false)
 	private Acuity acuity;
+	
+	@OneToMany(mappedBy="warrior")
+	private Set<WarriorUbiquity> ubiquities;
 	
 	@ManyToMany(mappedBy="warriors")
 	private List<Token> tokens;
@@ -161,11 +169,11 @@ public class Warrior implements Serializable{
 		this.sellsword = sellsword;
 	}
 
-	public Kin getKin() {
+	public Set<Kin> getKin() {
 		return kin;
 	}
 
-	public void setKin(Kin kin) {
+	public void setKin(Set<Kin> kin) {
 		this.kin = kin;
 	}
 

@@ -26,6 +26,7 @@ import ch.frick.darklands.daos.impl.JpaWarriorDAO;
 import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
 import ch.frick.darklands.data.WarriorClass;
+import ch.frick.darklands.data.WarriorUbiquity;
 
 @Singleton
 @Path("/warrior")
@@ -62,6 +63,20 @@ public class WarriorService {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonWarrior = mapper.writeValueAsString(warrior);
 		return Response.ok(jsonWarrior, MediaType.APPLICATION_JSON).build();
+	}
+	
+	@GET
+	@Path("/{param}/realm")
+	@Produces("application/json")
+	public Response getWarriorRealmInfo(@PathParam("param") Long id) throws JsonProcessingException {
+		LOGGER.debug("Get WarriorRealmInfo by id: " + id);
+		if (id == null || id < 1) {
+			return Response.serverError().build();
+		}
+		List<WarriorUbiquity> realmInfos = warriorDAO.getWarriorRealmInfo(id);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonRealmInfos = mapper.writeValueAsString(realmInfos);
+		return Response.ok(jsonRealmInfos, MediaType.APPLICATION_JSON).build();
 	}
 
 	@GET

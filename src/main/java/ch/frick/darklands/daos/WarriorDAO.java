@@ -4,6 +4,7 @@ import java.util.List;
 
 import ch.frick.darklands.data.Warrior;
 import ch.frick.darklands.data.WarriorClass;
+import ch.frick.darklands.data.WarriorUbiquity;
 import ch.frick.darklands.data.Token;
 
 public interface WarriorDAO extends DAO<Warrior>{
@@ -13,5 +14,7 @@ public interface WarriorDAO extends DAO<Warrior>{
 	List<WarriorClass> getWarriorClasses();
 	
 	List<Token> getTokens();
+
+	List<WarriorUbiquity> getWarriorRealmInfo(Long warrior_id);
 	
 }

@@ -1,6 +1,7 @@
 package ch.frick.darklands.data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,6 +23,9 @@ public class Ubiquity implements Serializable{
 	private Long id;
 	
 	private String name;
+	
+	@OneToMany(mappedBy="ubiquity")
+	private Set<WarriorUbiquity> warriors;
 
 	public Long getId() {
 		return id;
@@ -37,6 +42,5 @@ public class Ubiquity implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 }

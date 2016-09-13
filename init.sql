@@ -107,16 +107,28 @@ INSERT INTO Profile
 VALUES (3, 6, 30, 88, 97, 98, 56, 73);
 
 INSERT INTO Warrior
-  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kin_id, kindred_id, privilege_id, warrior_class_id, profile_id)
-VALUES (1, 'Belech', 560, 2, 80, false, 'BEL-ekh', 1, 1, 1, 1, 1, 1, 1, 1);
+  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kindred_id, privilege_id, warrior_class_id, profile_id)
+VALUES (1, 'Belech', 560, 2, 80, false, 'BEL-ekh', 1, 1, 1, 1, 1, 1, 1);
 
 INSERT INTO Warrior
-  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kin_id, kindred_id, privilege_id, warrior_class_id, profile_id)
-VALUES (2, 'Scion of Baalor', 394, 2, 80, false, 'SEYE-on of BAL-or', 1, 1, 1, 1, 1, 1, 1, 2);
+  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kindred_id, privilege_id, warrior_class_id, profile_id)
+VALUES (2, 'Scion of Baalor', 394, 2, 80, false, 'SEYE-on of BAL-or', 1, 1, 1, 1, 1, 1, 2);
 
 INSERT INTO Warrior
-  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kin_id, kindred_id, privilege_id, warrior_class_id, profile_id)
-VALUES (3, 'Oak Beast', 451, 2, 120, false, 'OHK beest', 1, 1, 2, 3, 2, 2, 5, 3);
+  (id, name, cost, hands, basesize, sellsword, spelling, unitsizemax, unitsizemin, acuity_id, kindred_id, privilege_id, warrior_class_id, profile_id)
+VALUES (3, 'Oak Beast', 451, 2, 120, false, 'OHK beest', 1, 1, 2, 2, 2, 5, 3);
+
+INSERT INTO warrior_kin
+  (warrior_id, kin_id)
+VALUES(1,1);
+
+INSERT INTO warrior_kin
+  (warrior_id, kin_id)
+VALUES(2,1);
+
+INSERT INTO warrior_kin
+  (warrior_id, kin_id)
+VALUES(3,3);
 
 INSERT INTO warrior_token
 	(token_id, warrior_id)
@@ -133,3 +145,43 @@ VALUES (5, 3);
 INSERT INTO warrior_token
 	(token_id, warrior_id)
 VALUES (3, 3);
+
+INSERT INTO Ubiquity
+	(id, name)
+VALUES (1, 'Unique');
+
+INSERT INTO Ubiquity
+	(id, name)
+VALUES (2, 'Mythic');
+
+INSERT INTO Ubiquity
+	(id, name)
+VALUES (3, 'Rare');
+
+INSERT INTO Realm
+	(id, name, kindred_id)
+VALUES (1, 'Baalor', 1);
+
+INSERT INTO Realm
+	(id, name, kindred_id)
+VALUES (2, 'Uí Néill', 2);
+
+INSERT INTO WarriorUbiquity
+	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
+VALUES (1, 1, 1, 1, 1);
+
+INSERT INTO WarriorUbiquity
+	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
+VALUES (2, 1, 2, 1, 1);
+
+INSERT INTO WarriorUbiquity
+	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
+VALUES (3, 1, 3, 2, 1);
+
+INSERT INTO WarriorUbiquity
+	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
+VALUES (4, 2, 3, 1, 1);
+
+INSERT INTO WarriorUbiquity
+	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
+VALUES (5, 3, 3, 1, 2);

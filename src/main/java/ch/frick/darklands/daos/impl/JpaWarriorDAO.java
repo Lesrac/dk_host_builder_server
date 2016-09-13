@@ -9,6 +9,7 @@ import ch.frick.darklands.daos.WarriorDAO;
 import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
 import ch.frick.darklands.data.WarriorClass;
+import ch.frick.darklands.data.WarriorUbiquity;
 
 public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements WarriorDAO {
 
@@ -65,6 +66,16 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 		EntityManager em = factory.createEntityManager();
 		TypedQuery<Token> q = em.createNamedQuery("token.all", Token.class);
 		List<Token> find = q.getResultList();
+		em.close();
+		return find;
+	}
+
+	@Override
+	public List<WarriorUbiquity> getWarriorRealmInfo(Long warrior_id) {
+		EntityManager em = factory.createEntityManager();
+		TypedQuery<WarriorUbiquity> q = em.createNamedQuery("warriorubiquity.warriorInfo", WarriorUbiquity.class);
+		q.setParameter("warrior_id", warrior_id);
+		List<WarriorUbiquity> find = q.getResultList();
 		em.close();
 		return find;
 	}
