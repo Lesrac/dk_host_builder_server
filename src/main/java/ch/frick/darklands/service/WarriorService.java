@@ -2,7 +2,6 @@ package ch.frick.darklands.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.inject.Singleton;
@@ -50,9 +49,23 @@ public class WarriorService {
 		String jsonWarriors = mapper.writeValueAsString(allWarriors);
 		return Response.ok(jsonWarriors, MediaType.APPLICATION_JSON).build();
 	}
-
+	
 	@GET
 	@Path("/{param}")
+	@Produces("application/json")
+	public Response getWarriorById(@PathParam("param") Long id) throws JsonProcessingException {
+		LOGGER.debug("Get Warrior by id: " + id);
+		if (id == null || id < 1) {
+			return Response.serverError().build();
+		}
+		Warrior warrior = warriorDAO.getById(id);
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonWarrior = mapper.writeValueAsString(warrior);
+		return Response.ok(jsonWarrior, MediaType.APPLICATION_JSON).build();
+	}
+
+	@GET
+	@Path("/kindred/{param}")
 	@Produces("application/json")
 	public Response getWarriorsByKindredId(@PathParam("param") Long id) throws JsonProcessingException {
 		LOGGER.debug("Get Warriors by Kindred: " + id);
