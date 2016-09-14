@@ -11,6 +11,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @SuppressWarnings("serial")
 @Entity
 @NamedQueries({
@@ -25,6 +27,7 @@ public class Ubiquity implements Serializable{
 	private String name;
 	
 	@OneToMany(mappedBy="ubiquity")
+	@JsonBackReference
 	private Set<WarriorUbiquity> warriors;
 
 	public Long getId() {
@@ -41,6 +44,14 @@ public class Ubiquity implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Set<WarriorUbiquity> getWarriors() {
+		return warriors;
+	}
+
+	public void setWarriors(Set<WarriorUbiquity> warriors) {
+		this.warriors = warriors;
 	}
 
 }

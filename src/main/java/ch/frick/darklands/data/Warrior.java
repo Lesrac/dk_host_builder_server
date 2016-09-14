@@ -224,5 +224,13 @@ public class Warrior implements Serializable{
 	public void setTokens(List<Token> tokens) {
 		this.tokens = tokens;
 	}
+
+	public Set<WarriorUbiquity> getUbiquities() {
+		return ubiquities;
+	}
+
+	public void setUbiquities(Set<WarriorUbiquity> ubiquities) {
+		this.ubiquities = ubiquities;
+	}
 	
 }

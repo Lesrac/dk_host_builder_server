@@ -44,6 +44,13 @@ public class Realm implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	public Kindred getKindred() {
+		return kindred;
+	}
+
+	public void setKindred(Kindred kindred) {
+		this.kindred = kindred;
+	}
 	
 }

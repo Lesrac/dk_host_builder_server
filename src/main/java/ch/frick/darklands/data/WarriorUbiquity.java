@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(uniqueConstraints={@UniqueConstraint(columnNames={"warrior_id", "ubiquity_id", "realm_id"})})
@@ -26,19 +28,62 @@ public class WarriorUbiquity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name = "WARRIOR_ID")
+	@JsonManagedReference
 	private Warrior warrior;
 	
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name = "UBIQUITY_ID")
+	@JsonManagedReference
 	private Ubiquity ubiquity;
 	
-	@ManyToOne
+	@ManyToOne(optional=false)
 	@JoinColumn(name = "REALM_ID")
+	@JsonManagedReference
 	private Realm realm;
 	
 	@Column
 	private int ubiquity_amount;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Warrior getWarrior() {
+		return warrior;
+	}
+
+	public void setWarrior(Warrior warrior) {
+		this.warrior = warrior;
+	}
+
+	public Ubiquity getUbiquity() {
+		return ubiquity;
+	}
+
+	public void setUbiquity(Ubiquity ubiquity) {
+		this.ubiquity = ubiquity;
+	}
+
+	public Realm getRealm() {
+		return realm;
+	}
+
+	public void setRealm(Realm realm) {
+		this.realm = realm;
+	}
+
+	public int getUbiquity_amount() {
+		return ubiquity_amount;
+	}
+
+	public void setUbiquity_amount(int ubiquity_amount) {
+		this.ubiquity_amount = ubiquity_amount;
+	}
 	
 }
