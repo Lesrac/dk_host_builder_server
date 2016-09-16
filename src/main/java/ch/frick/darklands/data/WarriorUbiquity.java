@@ -36,7 +36,7 @@ public class WarriorUbiquity implements Serializable{
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "UBIQUITY_ID")
-	@JsonBackReference
+	@JsonManagedReference
 	private Ubiquity ubiquity;
 	
 	@ManyToOne(optional=false)
