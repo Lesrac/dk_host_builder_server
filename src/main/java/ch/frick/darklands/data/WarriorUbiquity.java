@@ -14,6 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @SuppressWarnings("serial")
@@ -30,17 +31,16 @@ public class WarriorUbiquity implements Serializable{
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "WARRIOR_ID")
-	@JsonManagedReference
+	@JsonBackReference
 	private Warrior warrior;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "UBIQUITY_ID")
-	@JsonManagedReference
+	@JsonBackReference
 	private Ubiquity ubiquity;
 	
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "REALM_ID")
-	@JsonManagedReference
 	private Realm realm;
 	
 	@Column

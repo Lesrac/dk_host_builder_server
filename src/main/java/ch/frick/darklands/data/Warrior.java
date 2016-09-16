@@ -84,6 +84,7 @@ public class Warrior implements Serializable{
 	private Acuity acuity;
 	
 	@OneToMany(mappedBy="warrior")
+	@JsonManagedReference
 	private Set<WarriorUbiquity> ubiquities;
 	
 	@ManyToMany(mappedBy="warriors")
