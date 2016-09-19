@@ -1,7 +1,7 @@
 package ch.frick.darklands.service;
 
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
 import javax.ws.rs.core.Response;
 
