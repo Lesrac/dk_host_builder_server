@@ -31,6 +31,14 @@ public class Kindred implements Serializable{
 	@JsonBackReference
 	private List<Warrior> warriors = new ArrayList<Warrior>();
 
+	public Kindred(){
+		
+	}
+	
+	public Kindred(String name){
+		setName(name);
+	}
+	
 	public Long getId() {
 		return id;
 	}

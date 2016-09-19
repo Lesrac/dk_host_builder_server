@@ -20,44 +20,47 @@ import ch.frick.darklands.daos.KindredDAO;
 import ch.frick.darklands.daos.impl.JpaKindredDAO;
 import ch.frick.darklands.data.Kindred;
 
-
 @Singleton
 @Path("/kindred")
 public class KindredService {
-	
+
 	private final static Logger LOGGER = LoggerFactory.getLogger(KindredService.class);
-	
+
 	private KindredDAO kindredDAO;
-	
-	public KindredService(){
-		kindredDAO = new JpaKindredDAO();
+
+	public KindredService(KindredDAO kindredDAO) {
+		if (kindredDAO == null) {
+			this.kindredDAO = new JpaKindredDAO();
+		} else {
+			this.kindredDAO = kindredDAO;
+		}
 	}
 
 	@GET
 	@Path("/")
 	@Produces("application/json")
-	public Response getAllKindreds() throws JsonProcessingException{
+	public Response getAllKindreds() throws JsonProcessingException {
 		List<Kindred> allKindreds = kindredDAO.getAll();
 		LOGGER.debug("Get All Kindreds: " + allKindreds.size());
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonKindreds = mapper.writeValueAsString(allKindreds);
 		return Response.ok(jsonKindreds, MediaType.APPLICATION_JSON).build();
 	}
-	
+
 	@GET
 	@Path("/{param}")
 	@Produces("application/json")
-	public Response getKindredById(@PathParam("param") Long id) throws JsonProcessingException{
-		if(id == null || id < 1){
+	public Response getKindredById(@PathParam("param") Long id) throws JsonProcessingException {
+		if (id == null || id < 1) {
 			return Response.serverError().build();
 		}
 		Kindred kindred = kindredDAO.getById(id);
-		if(kindred == null){
+		if (kindred == null) {
 			return Response.serverError().build();
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonKindreds = mapper.writeValueAsString(kindred);
 		return Response.ok(jsonKindreds, MediaType.APPLICATION_JSON).build();
 	}
-	
+
 }
