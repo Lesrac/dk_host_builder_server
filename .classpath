@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry path="src" kind="src" excluding="main/|test/|main/java/|main/resources/|main/webapp/"/>
-	<classpathentry path="src/main" kind="src" excluding="java/|resources/|webapp/"/>
-	<classpathentry path="src/test" kind="src"/>
 	<classpathentry path="src/main/java" kind="src"/>
 	<classpathentry path="src/main/resources" kind="src"/>
 	<classpathentry path="src/main/webapp" kind="src"/>
