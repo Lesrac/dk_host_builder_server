@@ -176,7 +176,7 @@ VALUES (2, 1, 2, 1, 1);
 
 INSERT INTO WarriorUbiquity
 	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
-VALUES (3, 1, 3, 1, 1);
+VALUES (3, 1, 3, 1, 2);
 
 INSERT INTO WarriorUbiquity
 	(id, warrior_id, ubiquity_id, realm_id, ubiquity_amount)
