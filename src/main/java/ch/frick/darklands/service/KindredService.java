@@ -27,6 +27,10 @@ public class KindredService {
 	private final static Logger LOGGER = LoggerFactory.getLogger(KindredService.class);
 
 	private KindredDAO kindredDAO;
+	
+	public KindredService(){
+		this.kindredDAO = new JpaKindredDAO();
+	}
 
 	public KindredService(KindredDAO kindredDAO) {
 		if (kindredDAO == null) {
