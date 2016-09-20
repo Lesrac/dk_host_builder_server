@@ -40,6 +40,14 @@ public class WarriorService {
 		warriorDAO = new JpaWarriorDAO();
 	}
 
+	public WarriorService(WarriorDAO warriorDAO) {
+		if(warriorDAO == null){
+			warriorDAO = new JpaWarriorDAO();
+		} else{
+			this.warriorDAO = warriorDAO;
+		}
+	}
+
 	@GET
 	@Path("/")
 	@Produces("application/json")
@@ -123,12 +131,18 @@ public class WarriorService {
 		MultivaluedMap<String, String> tokenMap = uriInfo.getQueryParameters();
 		List<String> params = new ArrayList<String>();
 		for (String key : tokenMap.keySet()) {
-			params.add(tokenMap.get(key).get(0));
+			for(String value : tokenMap.get(key)){
+				params.add(value);
+			}
 		}
 
 		List<Warrior> filtered = warriorDAO.getAll().stream()
-				.filter(warrior -> params.stream()
-						.allMatch(token -> warrior.getTokens().stream().anyMatch(c -> c.getName().equals(token))))
+				.filter(warrior -> {
+					if(warrior.getTokens() != null){
+					return params.stream()
+						.allMatch(token -> warrior.getTokens().stream().anyMatch(c -> c.getName().equals(token)));}
+					return false;
+				})				
 				.collect(Collectors.toList());
 
 		ObjectMapper mapper = new ObjectMapper();

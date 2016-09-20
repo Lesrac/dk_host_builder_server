@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,73 +23,89 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @SuppressWarnings("serial")
 @Entity
-@NamedQueries({
-	@NamedQuery(name="warrior.all", query="select w from Warrior w"),
-	@NamedQuery(name="warrior.byKindred", query="select w from Warrior w where w.kindred.id = :kindred_id")
-}) 
-public class Warrior implements Serializable{
+@NamedQueries({ @NamedQuery(name = "warrior.all", query = "select w from Warrior w"),
+		@NamedQuery(name = "warrior.byKindred", query = "select w from Warrior w where w.kindred.id = :kindred_id") })
+public class Warrior implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KINDRED_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "KINDRED_ID", nullable = false)
 	@JsonManagedReference
 	private Kindred kindred;
-	
+
+	@Column(nullable = false)
 	private int hands;
-	
+
+	@Column(nullable = false)
 	private int unitSizeMin;
-	
+
+	@Column(nullable = false)
 	private int unitSizeMax;
-	
+
+	@Column(nullable = false)
 	private int baseSize;
-	
+
+	@Column(nullable = false)
 	private int cost;
-	
+
+	@Column(nullable = false)
 	private String spelling;
-	
+
+	@Column(nullable = false)
 	private boolean sellsword;
-	
-	@ManyToMany(fetch=FetchType.LAZY)
-  @JoinTable(
-  		name="WARRIOR_KIN", 
-  				joinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"),
-  	      inverseJoinColumns=@JoinColumn(name="KIN_ID", referencedColumnName="ID"))
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "WARRIOR_KIN", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "KIN_ID", referencedColumnName = "ID"))
 	private Set<Kin> kin;
-	
-	@OneToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="PROFILE_ID")
+
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PROFILE_ID")
 	private Profile profile;
-	
+
 	@ManyToMany
-  @JoinTable(
-      name="WARRIOR_EQUIPMENT",
-      joinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="EQUIPMENT_ID", referencedColumnName="ID"))
+	@JoinTable(name = "WARRIOR_EQUIPMENT", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "EQUIPMENT_ID", referencedColumnName = "ID"))
 	private List<Equipment> equipments;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="WARRIOR_CLASS_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "WARRIOR_CLASS_ID", nullable = false)
 	private WarriorClass warriorClass;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="PRIVILEGE_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PRIVILEGE_ID", nullable = false)
 	private Privilege privilege;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="ACUITY_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ACUITY_ID", nullable = false)
 	private Acuity acuity;
-	
-	@OneToMany(mappedBy="warrior")
+
+	@OneToMany(mappedBy = "warrior")
 	@JsonManagedReference
 	private Set<WarriorUbiquity> ubiquities;
-	
-	@ManyToMany(mappedBy="warriors")
+
+	@ManyToMany(mappedBy = "warriors")
 	private List<Token> tokens;
+
+	public Warrior() {
+	}
+
+	public Warrior(String name, Kindred kindred, int hands, int unitSizeMin, int unitSizeMax, int baseSize,
+			int cost, String spelling, boolean sellsword) {
+		super();
+		this.name = name;
+		this.kindred = kindred;
+		this.hands = hands;
+		this.unitSizeMin = unitSizeMin;
+		this.unitSizeMax = unitSizeMax;
+		this.baseSize = baseSize;
+		this.cost = cost;
+		this.spelling = spelling;
+		this.sellsword = sellsword;
+	}
 
 	public Long getId() {
 		return id;
@@ -233,5 +250,5 @@ public class Warrior implements Serializable{
 	public void setUbiquities(Set<WarriorUbiquity> ubiquities) {
 		this.ubiquities = ubiquities;
 	}
-	
+
 }

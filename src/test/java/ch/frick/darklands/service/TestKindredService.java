@@ -95,7 +95,6 @@ public class TestKindredService {
 		try {
 			Response response = kindredService.getKindredById(0l);
 			assertNotNull(response);
-			System.out.println(response);
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
 			assertEquals(response.getHeaderString("Content-Type"), null);
@@ -103,7 +102,6 @@ public class TestKindredService {
 			
 			response = kindredService.getKindredById(1l);
 			assertNotNull(response);
-			System.out.println(response);
 			assertEquals(Status.OK.getStatusCode(), response.getStatus());
 			assertEquals(response.getHeaderString("Content-Type"), MediaType.APPLICATION_JSON);
 			assertEquals(response.getEntity(), jsonKindred);

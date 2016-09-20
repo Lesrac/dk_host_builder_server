@@ -32,6 +32,13 @@ public class Token implements Serializable{
       inverseJoinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"))
 	private List<Warrior> warriors;
 
+	public Token(){}
+	
+	public Token(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}
