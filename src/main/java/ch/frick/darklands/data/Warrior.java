@@ -71,9 +71,8 @@ public class Warrior implements Serializable {
 	@JoinTable(name = "WARRIOR_EQUIPMENT", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "EQUIPMENT_ID", referencedColumnName = "ID"))
 	private List<Equipment> equipments;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "WARRIOR_CLASS_ID", nullable = false)
-	private WarriorClass warriorClass;
+	@ManyToMany(mappedBy = "warriors")
+	private List<WarriorClass> warriorClasses;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PRIVILEGE_ID", nullable = false)
@@ -93,8 +92,8 @@ public class Warrior implements Serializable {
 	public Warrior() {
 	}
 
-	public Warrior(String name, Kindred kindred, int hands, int unitSizeMin, int unitSizeMax, int baseSize,
-			int cost, String spelling, boolean sellsword) {
+	public Warrior(String name, Kindred kindred, int hands, int unitSizeMin, int unitSizeMax, int baseSize, int cost,
+			String spelling, boolean sellsword) {
 		super();
 		this.name = name;
 		this.kindred = kindred;
@@ -211,12 +210,12 @@ public class Warrior implements Serializable {
 		this.equipments = equipments;
 	}
 
-	public WarriorClass getWarriorClass() {
-		return warriorClass;
+	public List<WarriorClass> getWarriorClass() {
+		return warriorClasses;
 	}
 
-	public void setWarriorClass(WarriorClass warriorClass) {
-		this.warriorClass = warriorClass;
+	public void setWarriorClass(List<WarriorClass> warriorClass) {
+		this.warriorClasses = warriorClass;
 	}
 
 	public Privilege getPrivilege() {
