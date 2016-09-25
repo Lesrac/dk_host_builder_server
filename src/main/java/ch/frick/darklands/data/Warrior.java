@@ -42,10 +42,10 @@ public class Warrior implements Serializable {
 	private int hands;
 
 	@Column(nullable = false)
-	private int unitSizeMin;
+	private int uniteSizeMin;
 
 	@Column(nullable = false)
-	private int unitSizeMax;
+	private int uniteSizeMax;
 
 	@Column(nullable = false)
 	private int baseSize;
@@ -57,7 +57,7 @@ public class Warrior implements Serializable {
 	private String spelling;
 
 	@Column(nullable = false)
-	private boolean sellsword;
+	private boolean isSellsword;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "WARRIOR_KIN", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "KIN_ID", referencedColumnName = "ID"))
@@ -92,18 +92,18 @@ public class Warrior implements Serializable {
 	public Warrior() {
 	}
 
-	public Warrior(String name, Kindred kindred, int hands, int unitSizeMin, int unitSizeMax, int baseSize, int cost,
+	public Warrior(String name, Kindred kindred, int hands, int uniteSizeMin, int uniteSizeMax, int baseSize, int cost,
 			String spelling, boolean sellsword) {
 		super();
 		this.name = name;
 		this.kindred = kindred;
 		this.hands = hands;
-		this.unitSizeMin = unitSizeMin;
-		this.unitSizeMax = unitSizeMax;
+		this.uniteSizeMin = uniteSizeMin;
+		this.uniteSizeMax = uniteSizeMax;
 		this.baseSize = baseSize;
 		this.cost = cost;
 		this.spelling = spelling;
-		this.sellsword = sellsword;
+		this.isSellsword = sellsword;
 	}
 
 	public Long getId() {
@@ -138,20 +138,20 @@ public class Warrior implements Serializable {
 		this.hands = hands;
 	}
 
-	public int getUnitSizeMin() {
-		return unitSizeMin;
+	public int getUniteSizeMin() {
+		return uniteSizeMin;
 	}
 
-	public void setUnitSizeMin(int unitSizeMin) {
-		this.unitSizeMin = unitSizeMin;
+	public void setUniteSizeMin(int unitSizeMin) {
+		this.uniteSizeMin = unitSizeMin;
 	}
 
-	public int getUnitSizeMax() {
-		return unitSizeMax;
+	public int getUniteSizeMax() {
+		return uniteSizeMax;
 	}
 
-	public void setUnitSizeMax(int unitSizeMax) {
-		this.unitSizeMax = unitSizeMax;
+	public void setUniteSizeMax(int unitSizeMax) {
+		this.uniteSizeMax = unitSizeMax;
 	}
 
 	public int getBaseSize() {
@@ -179,11 +179,11 @@ public class Warrior implements Serializable {
 	}
 
 	public boolean isSellsword() {
-		return sellsword;
+		return isSellsword;
 	}
 
-	public void setSellsword(boolean sellsword) {
-		this.sellsword = sellsword;
+	public void setIsSellsword(boolean isSellsword) {
+		this.isSellsword = isSellsword;
 	}
 
 	public Set<Kin> getKin() {

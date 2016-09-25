@@ -1,6 +1,7 @@
 package ch.frick.darklands.data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
@@ -25,10 +27,18 @@ public class Kin implements Serializable{
 	
 	private String name;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KINDRED_ID", nullable = false)
-	private Kindred kindred;
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name = "KIN_KINDREDS", 
+		joinColumns = @JoinColumn(name = "KIN_ID", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "KINDRED_ID", referencedColumnName = "ID"))
+	private Set<Kindred> kindreds;
 
+	public Kin(){}
+	
+	public Kin(String name){
+		setName(name);
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -45,12 +55,12 @@ public class Kin implements Serializable{
 		this.name = name;
 	}
 
-	public Kindred getKindred() {
-		return kindred;
+	public Set<Kindred> getKindreds() {
+		return kindreds;
 	}
 
-	public void setKindred(Kindred kindred) {
-		this.kindred = kindred;
+	public void setKindreds(Set<Kindred> kindreds) {
+		this.kindreds = kindreds;
 	}
 	
 }

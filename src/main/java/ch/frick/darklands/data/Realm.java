@@ -14,20 +14,27 @@ import javax.persistence.NamedQuery;
 
 @SuppressWarnings("serial")
 @Entity
-@NamedQueries({
-	@NamedQuery(name="realm.all", query="select r from Realm r")
-}) 
-public class Realm implements Serializable{
+@NamedQueries({ @NamedQuery(name = "realm.all", query = "select r from Realm r") })
+public class Realm implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="KINDRED_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "KINDRED_ID", nullable = false)
 	private Kindred kindred;
+
+	public Realm() {
+	}
+
+	public Realm(String name, Kindred kindred) {
+		super();
+		this.name = name;
+		this.kindred = kindred;
+	}
 
 	public Long getId() {
 		return id;
@@ -52,5 +59,5 @@ public class Realm implements Serializable{
 	public void setKindred(Kindred kindred) {
 		this.kindred = kindred;
 	}
-	
+
 }

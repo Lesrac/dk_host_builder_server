@@ -15,25 +15,23 @@ import javax.persistence.NamedQuery;
 
 @SuppressWarnings("serial")
 @Entity
-@NamedQueries({
-	@NamedQuery(name="token.all", query="select t from Token t")
-}) 
-public class Token implements Serializable{
+@NamedQueries({ @NamedQuery(name = "token.all", query = "select t from Token t") })
+public class Token implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
+
 	@ManyToMany
-  @JoinTable(
-      name="WARRIOR_TOKEN",
-      joinColumns=@JoinColumn(name="TOKEN_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"))
+	@JoinTable(name = "WARRIOR_TOKEN", 
+		joinColumns = @JoinColumn(name = "TOKEN_ID", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"))
 	private List<Warrior> warriors;
 
-	public Token(){}
-	
+	public Token() {
+	}
+
 	public Token(String name) {
 		super();
 		this.name = name;
@@ -54,5 +52,5 @@ public class Token implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

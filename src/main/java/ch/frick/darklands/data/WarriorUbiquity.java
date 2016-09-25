@@ -19,32 +19,42 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(uniqueConstraints={@UniqueConstraint(columnNames={"warrior_id", "ubiquity_id", "realm_id"})})
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "warrior_id", "ubiquity_id", "realm_id" }) })
 @NamedQueries({
-	@NamedQuery(name="warriorubiquity.warriorInfo", query="select wur from WarriorUbiquity wur where wur.warrior.id = :warrior_id")
-}) 
-public class WarriorUbiquity implements Serializable{
+		@NamedQuery(name = "warriorubiquity.warriorInfo", query = "select wur from WarriorUbiquity wur where wur.warrior.id = :warrior_id") })
+public class WarriorUbiquity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@ManyToOne(optional=false)
+
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "WARRIOR_ID")
 	@JsonBackReference
 	private Warrior warrior;
-	
-	@ManyToOne(optional=false)
+
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "UBIQUITY_ID")
 	@JsonManagedReference
 	private Ubiquity ubiquity;
-	
-	@ManyToOne(optional=false)
+
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "REALM_ID")
 	private Realm realm;
-	
-	@Column
+
+	@Column(nullable = false)
 	private int ubiquity_amount;
+
+	public WarriorUbiquity() {
+	}
+
+	public WarriorUbiquity(Warrior warrior, Ubiquity ubiquity, Realm realm, int ubiquity_amount) {
+		super();
+		setWarrior(warrior);
+		setUbiquity(ubiquity);
+		setRealm(realm);
+		setUbiquity_amount(ubiquity_amount);
+	}
 
 	public Long getId() {
 		return id;
@@ -85,5 +95,5 @@ public class WarriorUbiquity implements Serializable{
 	public void setUbiquity_amount(int ubiquity_amount) {
 		this.ubiquity_amount = ubiquity_amount;
 	}
-	
+
 }

@@ -22,6 +22,13 @@ public class Acuity implements Serializable{
 	
 	private String name;
 
+	public Acuity(){}
+	
+	public Acuity(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}

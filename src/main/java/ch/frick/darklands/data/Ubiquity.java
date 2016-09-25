@@ -15,20 +15,26 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @SuppressWarnings("serial")
 @Entity
-@NamedQueries({
-	@NamedQuery(name="ubiquity.all", query="select u from Ubiquity u")
-}) 
-public class Ubiquity implements Serializable{
+@NamedQueries({ @NamedQuery(name = "ubiquity.all", query = "select u from Ubiquity u") })
+public class Ubiquity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
-	@OneToMany(mappedBy="ubiquity")
+
+	@OneToMany(mappedBy = "ubiquity")
 	@JsonBackReference
 	private Set<WarriorUbiquity> warriors;
+
+	public Ubiquity() {
+	}
+
+	public Ubiquity(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;

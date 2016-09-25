@@ -1,0 +1,55 @@
+1,Belech,BEL-ekh,1,1,1,2,1,1,80,466,1,0
+2,Scion of Baalor,SEYE-on of BAL-or,1,1,1,2,1,1,80,275,2,0
+3,Kraan,KRAN,1,1,1,2,1,1,30,233,3,0
+4,Aarwä,AR-way,1,2,2,0,1,1,60,119,4,0
+5,Untain of Baalor,UN-tayn of BAL-or,1,1,1,2,1,1,30,114,5,0
+6,Reiver Untain,REE-ver TAYN,1,1,3,2,1,1,30,60,6,0
+7,Gul-Gabrax Untain,GAB-rax UN-tayn,1,1,2,2,1,1,40,143,7,0
+8,Gabrax Untain,GAB-rax UN-tayn,1,1,4,2,1,1,30,105,8,0
+9,Warlock Lord of Baalor,WOR-lok LORD of BAL-or,1,1,1,2,1,1,30,158,9,0
+10,Tarvax Untain,TAR-vax UN-tayn,1,1,5,2,1,1,50,159,10,0
+11,Mallax Untain,MAL-ax UN-tayn,1,1,2,2,1,1,50,181,11,0
+12,Srónax Untain,SROH-nax UN-tayn,1,1,4,2,1,1,60,223,12,0
+13,Mammax Untain,MAM-ax UN-tayn,1,1,4,2,1,1,80,330,13,0
+14,Walvax Untain,WAL-vax UN-tayn,1,1,2,2,1,1,60,175,14,0
+15,Ograx Reiver Untain,OH-grax REE-ver UN-tayn,1,1,3,2,1,1,60,134,15,0
+16,Tain of Baalor,TAYN of BAL-or,1,1,1,2,1,1,30,77,16,0
+17,Reiver Tain,REE-ver TAYN,1,1,3,2,1,1,30,40,17,0
+18,Gul-Gabrax Tain,GAB-rax TAYN,1,1,2,2,1,1,40,90,18,0
+19,Gabrax Tain,GAB-rax TAYN,1,1,2,2,1,1,30,64,19,0
+20,Warlock of Baalor,WOR-lok of BAL-or,1,1,1,2,1,1,30,102,20,0
+21,Reiver Witch,REE-ver WICH,1,1,6,2,1,1,30,72,21,0
+22,Gabrax Warlock,GAB-rax WOR-lok,1,1,2,2,1,1,30,80,22,0
+23,Moraine-Sorcerer,Ma-RAYN SOR-sa-ra,1,3,1,2,1,1,40,133,23,0
+24,Tarvax Tain,TAR-vax TAYN,1,1,5,2,1,1,50,97,24,0
+25,Mallax Tain,MAL-ax TAYN,1,1,2,2,1,1,50,103,25,0
+26,Srónax Tain,SROH-nax TAYN,1,1,4,2,1,1,60,142,26,0
+27,Mammax Tain,MAM-ax TAYN,1,1,4,2,1,1,80,219,27,0
+28,Walvax Tain,WAL-vax TAYN,1,1,2,2,1,1,60,145,28,0
+29,Ograx Reiver Tain,OH-grax REE-ver TAYN,1,1,3,2,1,1,60,107,29,0
+30,Warrior of Baalor,WOH-ree-orz ov BAL-or,1,4,1,2,5,20,30,25,30,0
+31,Reiver,REE-ver,1,5,6,2,5,20,30,14,31,0
+32,Gul-Gabrax,GUL GAB-rax,1,4,2,2,3,15,40,40,32,0
+33,Gabrax,GAB-rax,1,5,2,2,5,20,30,21,33,0
+34,Tarvax,TAR-vax,1,5,5,2,3,10,50,52,34,0
+35,Srónax,SROH-nax,1,5,2,2,1,5,60,85,35,0
+36,Gul-Gabrox,GULL GAB-rox,1,5,2,2,1,3,60,74,36,0
+37,Ograx Reiver,OH-grax REE-ver,1,5,4,2,1,5,60,66,37,0
+38,Walvax,WAL-vax,1,5,2,2,1,3,60,80,38,0
+39,Toracx,TOR-az,1,2,5,0,1,3,60,71,39,0
+40,Ipracx,IP-raz,1,2,2,0,1,1,60,68,40,0
+41,Cúgacx,COO-gaz,1,2,5,0,1,1,50,51,41,0
+42,Gooracx,GOOR-az,1,2,2,0,1,1,60,35,42,0
+43,Capacx,CAP-az,1,2,2,0,1,1,60,19,43,0
+44,Tarvocx,TAR-voz,1,2,5,0,1,1,100,210,44,0
+45,Tarvox,TAR-vox,1,2,5,4,1,1,100,378,45,0
+46,Mallox,MAL-ox,1,2,2,2,1,1,100,276,46,0
+47,Srónox,SROH-nox,1,5,2,2,1,3,80,190,47,0
+48,Feleox,FEL-ee-ox,1,2,5,0,1,1,80,125,48,0
+49,Dainöch,DY-nukh,1,2,2,0,1,1,120,362,49,0
+50,Kraacken,KRAK-an,1,2,2,6,1,1,120,557,50,0
+51,Draackox,DRAK-ox,1,5,2,2,1,1,120,488,51,0
+52,Moraine Beast,Ma-RAYN BEEST,1,3,7,2,1,1,100,221,52,0
+53,Mammox,MAM-ox,1,2,2,0,1,1,120,494,53,0
+54,Nucránc,NUU-kraynk,1,5,2,2,1,3,80,171,54,0
+55,Cráncull,KRAYN-kool,1,2,2,2,1,1,120,489,55,0

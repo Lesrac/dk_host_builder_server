@@ -15,22 +15,19 @@ import javax.persistence.NamedQuery;
 
 @SuppressWarnings("serial")
 @Entity
-@NamedQueries({
-	@NamedQuery(name="warriorClass.all", query="select w from WarriorClass w")
-}) 
-public class WarriorClass implements Serializable{
+@NamedQueries({ @NamedQuery(name = "warriorClass.all", query = "select w from WarriorClass w") })
+public class WarriorClass implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
+
 	@ManyToMany
-  @JoinTable(
-      name="WARRIOR_CLASS",
-      joinColumns=@JoinColumn(name="WARRIOR_CLASS_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="WARRIOR_ID", referencedColumnName="ID"))
+	@JoinTable(name = "WARRIOR_CLASSES", 
+		joinColumns = @JoinColumn(name = "WARRIORCLASS_ID", referencedColumnName = "ID"), 
+		inverseJoinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"))
 	private List<Warrior> warriors;
 
 	public Long getId() {
@@ -48,5 +45,5 @@ public class WarriorClass implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

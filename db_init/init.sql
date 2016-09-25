@@ -48,15 +48,15 @@ VALUES (5, 'Tree');
 
 INSERT INTO Kin
   (id, name, kindred_id)
-VALUES (1, 'Scion of Baalor', 1);
+VALUES (1, 'Scion of Baalor');
 
 INSERT INTO Kin
   (id, name, kindred_id)
-VALUES (2, 'Warrior of Baalor', 1);
+VALUES (2, 'Warrior of Baalor');
 
 INSERT INTO Kin
   (id, name, kindred_id)
-VALUES (3, 'Tree Beast', 2);
+VALUES (3, 'Tree Beast');
 
 INSERT INTO Acuity
   (id, name)

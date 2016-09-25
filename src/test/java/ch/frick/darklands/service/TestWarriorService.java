@@ -8,8 +8,11 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedHashMap;
@@ -31,9 +34,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.frick.darklands.daos.WarriorDAO;
+import ch.frick.darklands.data.Acuity;
+import ch.frick.darklands.data.Kin;
 import ch.frick.darklands.data.Kindred;
+import ch.frick.darklands.data.Privilege;
+import ch.frick.darklands.data.Realm;
 import ch.frick.darklands.data.Token;
+import ch.frick.darklands.data.Ubiquity;
 import ch.frick.darklands.data.Warrior;
+import ch.frick.darklands.data.WarriorUbiquity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestWarriorService {
@@ -67,6 +76,18 @@ public class TestWarriorService {
 		warrior = new Warrior("Belech", k1, 2, 1, 1, 80, 254, "BelEk2", false);
 		warrior.setId(1l);
 		warrior.setTokens(tl1);
+		warrior.setPrivilege(new Privilege("Noble"));
+		warrior.setAcuity(new Acuity("Elite"));
+		Set<Kin> kins = new HashSet<>();
+		kins.add(new Kin("Scion of Belech"));
+		warrior.setKin(kins);
+		Realm r = new Realm("Baalor", k1);
+		Ubiquity u = new Ubiquity("Unique");
+		Set<WarriorUbiquity> ubiquities = new HashSet<>();
+		ubiquities.add(new WarriorUbiquity(warrior,u,r,1));
+		
+		warrior.setUbiquities(ubiquities);
+		
 		
 		warriors.add(warrior);
 		warriors.add(new Warrior("Naraa", k1, 2, 1, 1, 30, 154, "Naraa", false));
@@ -133,10 +154,17 @@ public class TestWarriorService {
 			assertEquals(Status.OK.getStatusCode(), response.getStatus());
 			assertEquals(response.getHeaderString("Content-Type"), MediaType.APPLICATION_JSON);
 			assertEquals(response.getEntity(), jsonWarrior);
+			
+//			ObjectMapper mapper = new ObjectMapper();
+//			System.out.println(response.getEntity());
+//			Warrior w = mapper.readValue(response.getEntity().toString(), Warrior.class);
+			
 			verify(warriorDAO).getById(1l);
 		} catch (JsonProcessingException e) {
 			fail("Exception happened: " + e.getMessage());
-		}
+		}/*catch (IOException e) {
+			fail("JSON to Object failed: " + e.getMessage());
+		} */
 	}
 
 //	@Test

@@ -21,6 +21,13 @@ public class Privilege implements Serializable{
 	private Long id;
 	
 	private String name;
+	
+	public Privilege(){}
+
+	public Privilege(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
