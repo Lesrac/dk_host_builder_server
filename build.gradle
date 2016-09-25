@@ -25,6 +25,10 @@ jar{
 	version='0.0.1'
 }
 
+war {
+    archiveName = 'Darklands_Host_Builder.war'
+}
+
 task wrapper(type: Wrapper){
 	gradleVersion = '2.14'
 }
