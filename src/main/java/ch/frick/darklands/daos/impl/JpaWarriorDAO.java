@@ -17,6 +17,7 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 	public Warrior getById(Long id) {
 		EntityManager em = factory.createEntityManager();
 		Warrior find = em.find(Warrior.class, id);
+		find.getProfile().getSpecialRules().size();
 		em.close();
 		return find;
 	}
