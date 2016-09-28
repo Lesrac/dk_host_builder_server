@@ -3,6 +3,8 @@ package ch.frick.darklands.data;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,6 +39,13 @@ public class Profile implements Serializable{
 	private int authority;
 	
 	private int temper;
+	
+	@ElementCollection
+  @CollectionTable(
+        name="CONST_MARKER",
+        joinColumns=@JoinColumn(name="PROFILE_ID")
+  )
+	private List<Integer> constitution_markers;
 	
 	@ManyToMany
 	@JoinTable(
@@ -115,6 +124,14 @@ public class Profile implements Serializable{
 
 	public void setSpecialRules(List<SpecialRule> specialRules) {
 		this.specialRules = specialRules;
+	}
+
+	public List<Integer> getConstitution_markers() {
+		return constitution_markers;
+	}
+
+	public void setConstitution_markers(List<Integer> constitution_markers) {
+		this.constitution_markers = constitution_markers;
 	}
 	
 }
