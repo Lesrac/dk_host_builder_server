@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({
 	@NamedQuery(name="combatWeapon.all", query="select c from CombatWeapon c")

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({ @NamedQuery(name = "ubiquity.all", query = "select u from Ubiquity u") })
 public class Ubiquity implements Serializable {

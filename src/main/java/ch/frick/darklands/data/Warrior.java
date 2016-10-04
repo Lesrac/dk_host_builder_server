@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({ @NamedQuery(name = "warrior.all", query = "select w from Warrior w"),
 		@NamedQuery(name = "warrior.byKindred", query = "select w from Warrior w where w.kindred.id = :kindred_id") })

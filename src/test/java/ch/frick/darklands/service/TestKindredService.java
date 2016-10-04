@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.never;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -15,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -36,17 +39,25 @@ import ch.frick.darklands.data.Kindred;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TestKindredService {
-	
+
+	@MonotonicNonNull
 	private static List<Kindred> kindreds;
+	@MonotonicNonNull
 	private static Kindred kindred;
+	@MonotonicNonNull
 	private static String jsonKindreds;
+	@MonotonicNonNull
 	private static String jsonKindred;
-	
+
+	@MonotonicNonNull
 	private KindredService kindredService;
+	
 	@Mock
+	@MonotonicNonNull
 	private KindredDAO kindredDAO;
 
 	@BeforeClass
+	@EnsuresNonNull({"kindreds", "jsonKindreds", "jsonKindred"})
 	public static void setUpBeforeClass() throws Exception {
 		kindreds = new LinkedList<>();
 		kindred = new Kindred("Fomoraic");
@@ -65,6 +76,8 @@ public class TestKindredService {
 	}
 
 	@Before
+	@EnsuresNonNull({"kindredService", "kindredDAO"})
+	@RequiresNonNull({"kindreds", "kindred"})
 	public void setUp() throws Exception {
 		kindredDAO = mock(KindredDAO.class);
 		when(kindredDAO.getAll()).thenReturn(kindreds);
@@ -77,6 +90,7 @@ public class TestKindredService {
 	}
 
 	@Test
+	@RequiresNonNull({"kindredService", "kindredDAO", "jsonKindred", "jsonKindreds"})
 	public void testGetAllKindreds() {
 		try {
 			Response response = kindredService.getAllKindreds();
@@ -91,15 +105,15 @@ public class TestKindredService {
 	}
 
 	@Test
+	@RequiresNonNull({"kindredService", "kindredDAO", "jsonKindred"})
 	public void testGetKindredById() {
 		try {
 			Response response = kindredService.getKindredById(0l);
 			assertNotNull(response);
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
-			assertEquals(response.getHeaderString("Content-Type"), null);
 			verify(kindredDAO, never()).getById(0l);
-			
+
 			response = kindredService.getKindredById(1l);
 			assertNotNull(response);
 			assertEquals(Status.OK.getStatusCode(), response.getStatus());
@@ -110,5 +124,5 @@ public class TestKindredService {
 			fail("Exception happened: " + e.getMessage());
 		}
 	}
-	
+
 }

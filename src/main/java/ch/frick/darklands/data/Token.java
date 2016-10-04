@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({ @NamedQuery(name = "token.all", query = "select t from Token t") })
 public class Token implements Serializable {

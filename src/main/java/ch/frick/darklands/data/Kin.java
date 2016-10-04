@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({
 	@NamedQuery(name="kin.all", query="select k from Kin k")
@@ -36,7 +36,7 @@ public class Kin implements Serializable{
 	public Kin(){}
 	
 	public Kin(String name){
-		setName(name);
+		this.name = name;
 	}
 	
 	public Long getId() {

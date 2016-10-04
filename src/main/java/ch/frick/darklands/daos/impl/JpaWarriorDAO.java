@@ -1,5 +1,6 @@
 package ch.frick.darklands.daos.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -22,13 +23,14 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 		return find;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warrior> getAll() {
 		EntityManager em = factory.createEntityManager();
 		TypedQuery<Warrior> q = em.createNamedQuery("warrior.all", Warrior.class);
 		List<Warrior> find = q.getResultList();
 		em.close();
-		return find;
+		return find.isEmpty() ? Collections.EMPTY_LIST : find;
 	}
 
 	@Override
@@ -43,6 +45,7 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warrior> getWarriorsByKindred(Long kindred_id) {
 		EntityManager em = factory.createEntityManager();
@@ -50,27 +53,30 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 		q.setParameter("kindred_id", kindred_id);
 		List<Warrior> find = q.getResultList();
 		em.close();
-		return find;
+		return find.isEmpty() ? Collections.EMPTY_LIST : find;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<WarriorClass> getWarriorClasses() {
 		EntityManager em = factory.createEntityManager();
 		TypedQuery<WarriorClass> q = em.createNamedQuery("warriorClass.all", WarriorClass.class);
 		List<WarriorClass> find = q.getResultList();
 		em.close();
-		return find;
+		return find.isEmpty() ? Collections.EMPTY_LIST : find;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Token> getTokens() {
 		EntityManager em = factory.createEntityManager();
 		TypedQuery<Token> q = em.createNamedQuery("token.all", Token.class);
 		List<Token> find = q.getResultList();
 		em.close();
-		return find;
+		return find.isEmpty() ? Collections.EMPTY_LIST : find;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<WarriorUbiquity> getWarriorRealmInfo(Long warrior_id) {
 		EntityManager em = factory.createEntityManager();
@@ -78,7 +84,7 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 		q.setParameter("warrior_id", warrior_id);
 		List<WarriorUbiquity> find = q.getResultList();
 		em.close();
-		return find;
+		return find.isEmpty() ? Collections.EMPTY_LIST : find;
 	}
 
 }

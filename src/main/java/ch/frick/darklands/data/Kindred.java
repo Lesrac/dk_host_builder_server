@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @NamedQueries({
 	@NamedQuery(name="kindred.all", query="select k from Kindred k")
@@ -36,7 +36,7 @@ public class Kindred implements Serializable{
 	}
 	
 	public Kindred(String name){
-		setName(name);
+		this.name = name;
 	}
 	
 	public Long getId() {

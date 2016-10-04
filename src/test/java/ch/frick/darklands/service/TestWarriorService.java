@@ -8,7 +8,6 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,6 +20,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.checkerframework.checker.nullness.qual.EnsuresNonNull;
+import org.checkerframework.checker.nullness.qual.MonotonicNonNull;
+import org.checkerframework.checker.nullness.qual.RequiresNonNull;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,18 +49,26 @@ import ch.frick.darklands.data.WarriorUbiquity;
 @RunWith(MockitoJUnitRunner.class)
 public class TestWarriorService {
 	
+	@MonotonicNonNull
 	private static List<Warrior> warriors;
+	@MonotonicNonNull
 	private static String jsonWarriors;
+	@MonotonicNonNull
 	private static Warrior warrior;
+	@MonotonicNonNull
 	private static String jsonWarrior;
+	@MonotonicNonNull
 	private static String jsonWarriorList;
 	
+	@MonotonicNonNull
 	private WarriorService warriorService;
 	
 	@Mock
+	@MonotonicNonNull
 	private WarriorDAO warriorDAO;
 	
 	@BeforeClass
+	@EnsuresNonNull({"warriors", "jsonWarriors", "jsonWarrior", "jsonWarriorList"})
 	public static void setUpBeforeClass() throws Exception {
 		warriors = new LinkedList<>();
 		
@@ -114,6 +124,7 @@ public class TestWarriorService {
 	}
 
 	@Before
+	@RequiresNonNull({"warriors", "warrior"})
 	public void setUp() throws Exception {
 		warriorDAO = mock(WarriorDAO.class);
 		when(warriorDAO.getAll()).thenReturn(warriors);
@@ -126,6 +137,7 @@ public class TestWarriorService {
 	}
 
 	@Test
+	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarriors"})
 	public void testGetAllWarriors() {
 		try {
 			Response response = warriorService.getAllWarriors();
@@ -140,13 +152,13 @@ public class TestWarriorService {
 	}
 
 	@Test
+	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarrior"})
 	public void testGetWarriorById() {
 		try {
 			Response response = warriorService.getWarriorById(0l);
 			assertNotNull(response);
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
-			assertEquals(response.getHeaderString("Content-Type"), null);
 			verify(warriorDAO, never()).getById(0l);
 			
 			response = warriorService.getWarriorById(1l);
@@ -188,6 +200,7 @@ public class TestWarriorService {
 	}
 
 	@Test
+	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarriorList"})
 	public void testGetWarriorsByToken() {
 		UriInfo uriInfo = mock(UriInfo.class);
 		MultivaluedMap<String, String> values = new MultivaluedHashMap<>();

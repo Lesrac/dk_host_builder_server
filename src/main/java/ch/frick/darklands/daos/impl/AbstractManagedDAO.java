@@ -4,14 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import ch.frick.darklands.daos.ManagedDAO;
 
 public abstract class AbstractManagedDAO<T> implements ManagedDAO<T> {
-
-	private final static Logger Logger = LoggerFactory.getLogger(AbstractManagedDAO.class);
 
 	protected EntityManagerFactory factory;
 
@@ -20,9 +17,12 @@ public abstract class AbstractManagedDAO<T> implements ManagedDAO<T> {
 	}
 
 	@Override
-	public T manage(T instance) {
+	public @Nullable T manage(T instance) {
 		EntityManager em = factory.createEntityManager();
-		T merge = em.merge(instance);
+		T merge = null;
+		if (instance != null) {
+			merge = em.merge(instance);
+		}
 		em.close();
 		return merge;
 	}

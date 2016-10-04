@@ -17,7 +17,8 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@SuppressWarnings("serial")
+
+@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "warrior_id", "ubiquity_id", "realm_id" }) })
 @NamedQueries({
@@ -50,10 +51,10 @@ public class WarriorUbiquity implements Serializable {
 
 	public WarriorUbiquity(Warrior warrior, Ubiquity ubiquity, Realm realm, int ubiquity_amount) {
 		super();
-		setWarrior(warrior);
-		setUbiquity(ubiquity);
-		setRealm(realm);
-		setUbiquity_amount(ubiquity_amount);
+		this.warrior = warrior;
+		this.ubiquity = ubiquity;
+		this.realm = realm;
+		this.ubiquity_amount = ubiquity_amount;
 	}
 
 	public Long getId() {
