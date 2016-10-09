@@ -40,6 +40,8 @@ import ch.frick.darklands.data.Kindred;
 @RunWith(MockitoJUnitRunner.class)
 public class TestKindredService {
 
+	private static final Long NULL_ID = 100l;
+
 	@MonotonicNonNull
 	private static List<Kindred> kindreds;
 	@MonotonicNonNull
@@ -51,13 +53,13 @@ public class TestKindredService {
 
 	@MonotonicNonNull
 	private KindredService kindredService;
-	
+
 	@Mock
 	@MonotonicNonNull
 	private KindredDAO kindredDAO;
 
 	@BeforeClass
-	@EnsuresNonNull({"kindreds", "jsonKindreds", "jsonKindred"})
+	@EnsuresNonNull({ "kindreds", "jsonKindreds", "jsonKindred" })
 	public static void setUpBeforeClass() throws Exception {
 		kindreds = new LinkedList<>();
 		kindred = new Kindred("Fomoraic");
@@ -76,12 +78,17 @@ public class TestKindredService {
 	}
 
 	@Before
-	@EnsuresNonNull({"kindredService", "kindredDAO"})
-	@RequiresNonNull({"kindreds", "kindred"})
+	@EnsuresNonNull({ "kindredService", "kindredDAO" })
+	@RequiresNonNull({ "kindreds", "kindred" })
 	public void setUp() throws Exception {
 		kindredDAO = mock(KindredDAO.class);
 		when(kindredDAO.getAll()).thenReturn(kindreds);
 		when(kindredDAO.getById(1l)).thenReturn(kindred);
+		when(kindredDAO.getById(NULL_ID)).thenReturn(null);
+		// Only for testcoverage
+		kindredService = new KindredService();
+		kindredService = new KindredService(null);
+		// done
 		kindredService = new KindredService(kindredDAO);
 	}
 
@@ -90,7 +97,7 @@ public class TestKindredService {
 	}
 
 	@Test
-	@RequiresNonNull({"kindredService", "kindredDAO", "jsonKindred", "jsonKindreds"})
+	@RequiresNonNull({ "kindredService", "kindredDAO", "jsonKindred", "jsonKindreds" })
 	public void testGetAllKindreds() {
 		try {
 			Response response = kindredService.getAllKindreds();
@@ -105,7 +112,7 @@ public class TestKindredService {
 	}
 
 	@Test
-	@RequiresNonNull({"kindredService", "kindredDAO", "jsonKindred"})
+	@RequiresNonNull({ "kindredService", "kindredDAO", "jsonKindred" })
 	public void testGetKindredById() {
 		try {
 			Response response = kindredService.getKindredById(0l);
@@ -113,6 +120,18 @@ public class TestKindredService {
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
 			verify(kindredDAO, never()).getById(0l);
+
+			response = kindredService.getKindredById(null);
+			assertNotNull(response);
+			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+			assertEquals(response.hasEntity(), false);
+			verify(kindredDAO, never()).getById(null);
+
+			response = kindredService.getKindredById(NULL_ID);
+			assertNotNull(response);
+			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+			assertEquals(response.hasEntity(), false);
+			verify(kindredDAO).getById(NULL_ID);
 
 			response = kindredService.getKindredById(1l);
 			assertNotNull(response);

@@ -49,6 +49,8 @@ import ch.frick.darklands.data.WarriorUbiquity;
 @RunWith(MockitoJUnitRunner.class)
 public class TestWarriorService {
 
+	private static final Long NULL_ID = 100l;
+
 	@MonotonicNonNull
 	private static List<Warrior> warriors;
 	@MonotonicNonNull
@@ -73,10 +75,10 @@ public class TestWarriorService {
 		warriors = new LinkedList<>();
 
 		Token t1 = new Token("Fomoraic");
-		Token t2 = new Token("Erainn");
-		Token t3 = new Token("Tree");
+		// Token t2 = new Token("Erainn");
+		// Token t3 = new Token("Tree");
 		Token t4 = new Token("Beast");
-		Token t5 = new Token("Human");
+		// Token t5 = new Token("Human");
 		List<Token> tl1 = new LinkedList<>();
 		tl1.add(t1);
 		tl1.add(t4);
@@ -129,6 +131,11 @@ public class TestWarriorService {
 		warriorDAO = mock(WarriorDAO.class);
 		when(warriorDAO.getAll()).thenReturn(warriors);
 		when(warriorDAO.getById(1l)).thenReturn(warrior);
+		when(warriorDAO.getById(NULL_ID)).thenReturn(null);
+		// Only for testcoverage
+		warriorService = new WarriorService();
+		warriorService = new WarriorService(null);
+		// done
 		warriorService = new WarriorService(warriorDAO);
 	}
 
@@ -160,6 +167,18 @@ public class TestWarriorService {
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
 			verify(warriorDAO, never()).getById(0l);
+
+			response = warriorService.getWarriorById(null);
+			assertNotNull(response);
+			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+			assertEquals(response.hasEntity(), false);
+			verify(warriorDAO, never()).getById(null);
+
+			response = warriorService.getWarriorById(NULL_ID);
+			assertNotNull(response);
+			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
+			assertEquals(response.hasEntity(), false);
+			verify(warriorDAO).getById(NULL_ID);
 
 			response = warriorService.getWarriorById(1l);
 			assertNotNull(response);
