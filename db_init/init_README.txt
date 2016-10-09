@@ -21,3 +21,8 @@ Create DB (Postgres - PostgreSQL\9.6\bin>psql -U postgres darklands_host_builder
 
 Warrior.csv:
 id/name/spelling/kindred/Privilege/Acuity/Hands/UnitSizeMin/UnitSizeMax/BaseSize/Cost/Profile_ID
+
+Image to bytea:
+Step 1 (convert the image to base64 string)
+INSERT INTO images (image_name, image_data)
+VALUES( 'image_one', decode('', 'base64') );
