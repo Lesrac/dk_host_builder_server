@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import ch.frick.darklands.daos.WarriorDAO;
 import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
@@ -15,10 +17,12 @@ import ch.frick.darklands.data.WarriorUbiquity;
 public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements WarriorDAO {
 
 	@Override
-	public Warrior getById(Long id) {
+	public @Nullable Warrior getById(Long id) {
 		EntityManager em = factory.createEntityManager();
 		Warrior find = em.find(Warrior.class, id);
-		find.getProfile().getSpecialRules().size();
+		if (find != null) {
+			find.getProfile().getSpecialRules().size();
+		}
 		em.close();
 		return find;
 	}

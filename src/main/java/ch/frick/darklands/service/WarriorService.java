@@ -41,9 +41,9 @@ public class WarriorService {
 	}
 
 	public WarriorService(WarriorDAO warriorDAO) {
-		if(warriorDAO == null){
-			warriorDAO = new JpaWarriorDAO();
-		} else{
+		if (warriorDAO == null) {
+			this.warriorDAO = new JpaWarriorDAO();
+		} else {
 			this.warriorDAO = warriorDAO;
 		}
 	}
@@ -58,21 +58,26 @@ public class WarriorService {
 		String jsonWarriors = mapper.writeValueAsString(allWarriors);
 		return Response.ok(jsonWarriors, MediaType.APPLICATION_JSON).build();
 	}
-	
+
 	@GET
 	@Path("/{param}")
 	@Produces("application/json")
 	public Response getWarriorById(@PathParam("param") Long id) throws JsonProcessingException {
 		LOGGER.debug("Get Warrior by id: " + id);
 		if (id == null || id < 1) {
+			LOGGER.warn("Wrong ID param: " + id);
 			return Response.serverError().build();
 		}
 		Warrior warrior = warriorDAO.getById(id);
+		if (warrior == null) {
+			LOGGER.warn("Warrior not found, ID: " + id);
+			return Response.serverError().build();
+		}
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonWarrior = mapper.writeValueAsString(warrior);
 		return Response.ok(jsonWarrior, MediaType.APPLICATION_JSON).build();
 	}
-	
+
 	@GET
 	@Path("/{param}/realm")
 	@Produces("application/json")
@@ -131,19 +136,17 @@ public class WarriorService {
 		MultivaluedMap<String, String> tokenMap = uriInfo.getQueryParameters();
 		List<String> params = new ArrayList<String>();
 		for (String key : tokenMap.keySet()) {
-			for(String value : tokenMap.get(key)){
+			for (String value : tokenMap.get(key)) {
 				params.add(value);
 			}
 		}
 
-		List<Warrior> filtered = warriorDAO.getAll().stream()
-				.filter(warrior -> {
-					if(warrior.getTokens() != null){
-					return params.stream()
-						.allMatch(token -> warrior.getTokens().stream().anyMatch(c -> c.getName().equals(token)));}
-					return false;
-				})				
-				.collect(Collectors.toList());
+		List<Warrior> filtered = warriorDAO.getAll().stream().filter(warrior -> {
+			if (warrior.getTokens() != null) {
+				return params.stream().allMatch(token -> warrior.getTokens().stream().anyMatch(c -> c.getName().equals(token)));
+			}
+			return false;
+		}).collect(Collectors.toList());
 
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonWarriors = mapper.writeValueAsString(filtered);

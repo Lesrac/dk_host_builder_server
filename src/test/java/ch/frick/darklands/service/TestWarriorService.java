@@ -48,7 +48,7 @@ import ch.frick.darklands.data.WarriorUbiquity;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestWarriorService {
-	
+
 	@MonotonicNonNull
 	private static List<Warrior> warriors;
 	@MonotonicNonNull
@@ -59,30 +59,31 @@ public class TestWarriorService {
 	private static String jsonWarrior;
 	@MonotonicNonNull
 	private static String jsonWarriorList;
-	
+
 	@MonotonicNonNull
 	private WarriorService warriorService;
-	
+
 	@Mock
 	@MonotonicNonNull
 	private WarriorDAO warriorDAO;
-	
+
 	@BeforeClass
-	@EnsuresNonNull({"warriors", "jsonWarriors", "jsonWarrior", "jsonWarriorList"})
+	@EnsuresNonNull({ "warriors", "jsonWarriors", "jsonWarrior", "jsonWarriorList" })
 	public static void setUpBeforeClass() throws Exception {
 		warriors = new LinkedList<>();
-		
+
 		Token t1 = new Token("Fomoraic");
 		Token t2 = new Token("Erainn");
 		Token t3 = new Token("Tree");
 		Token t4 = new Token("Beast");
 		Token t5 = new Token("Human");
 		List<Token> tl1 = new LinkedList<>();
-		tl1.add(t1); tl1.add(t4);
-		
+		tl1.add(t1);
+		tl1.add(t4);
+
 		Kindred k1 = new Kindred("Fomoraic");
 		Kindred k2 = new Kindred("Erainn");
-		
+
 		warrior = new Warrior("Belech", k1, 2, 1, 1, 80, 254, "BelEk2", false);
 		warrior.setId(1l);
 		warrior.setTokens(tl1);
@@ -94,11 +95,10 @@ public class TestWarriorService {
 		Realm r = new Realm("Baalor", k1);
 		Ubiquity u = new Ubiquity("Unique");
 		Set<WarriorUbiquity> ubiquities = new HashSet<>();
-		ubiquities.add(new WarriorUbiquity(warrior,u,r,1));
-		
+		ubiquities.add(new WarriorUbiquity(warrior, u, r, 1));
+
 		warrior.setUbiquities(ubiquities);
-		
-		
+
 		warriors.add(warrior);
 		warriors.add(new Warrior("Naraa", k1, 2, 1, 1, 30, 154, "Naraa", false));
 		warriors.add(new Warrior("Warrior of Baalor", k1, 2, 1, 20, 30, 21, "W of WB", false));
@@ -110,7 +110,7 @@ public class TestWarriorService {
 		warriors.add(new Warrior("Maiobhanag", k2, 2, 1, 20, 30, 11, "Mahbo", false));
 		warriors.add(new Warrior("Thuanagh", k2, 2, 1, 20, 30, 11, "Tua-Nagh", false));
 		warriors.add(new Warrior("Catirin", k2, 2, 1, 1, 30, 64, "Cait-lun", false));
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		jsonWarriors = mapper.writeValueAsString(warriors);
 		jsonWarrior = mapper.writeValueAsString(warrior);
@@ -124,7 +124,7 @@ public class TestWarriorService {
 	}
 
 	@Before
-	@RequiresNonNull({"warriors", "warrior"})
+	@RequiresNonNull({ "warriors", "warrior" })
 	public void setUp() throws Exception {
 		warriorDAO = mock(WarriorDAO.class);
 		when(warriorDAO.getAll()).thenReturn(warriors);
@@ -137,7 +137,7 @@ public class TestWarriorService {
 	}
 
 	@Test
-	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarriors"})
+	@RequiresNonNull({ "warriorService", "warriorDAO", "jsonWarriors" })
 	public void testGetAllWarriors() {
 		try {
 			Response response = warriorService.getAllWarriors();
@@ -152,7 +152,7 @@ public class TestWarriorService {
 	}
 
 	@Test
-	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarrior"})
+	@RequiresNonNull({ "warriorService", "warriorDAO", "jsonWarrior" })
 	public void testGetWarriorById() {
 		try {
 			Response response = warriorService.getWarriorById(0l);
@@ -160,47 +160,49 @@ public class TestWarriorService {
 			assertEquals(Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus());
 			assertEquals(response.hasEntity(), false);
 			verify(warriorDAO, never()).getById(0l);
-			
+
 			response = warriorService.getWarriorById(1l);
 			assertNotNull(response);
 			assertEquals(Status.OK.getStatusCode(), response.getStatus());
 			assertEquals(response.getHeaderString("Content-Type"), MediaType.APPLICATION_JSON);
 			assertEquals(response.getEntity(), jsonWarrior);
-			
-//			ObjectMapper mapper = new ObjectMapper();
-//			System.out.println(response.getEntity());
-//			Warrior w = mapper.readValue(response.getEntity().toString(), Warrior.class);
-			
+
+			// ObjectMapper mapper = new ObjectMapper();
+			// System.out.println(response.getEntity());
+			// Warrior w = mapper.readValue(response.getEntity().toString(),
+			// Warrior.class);
+
 			verify(warriorDAO).getById(1l);
 		} catch (JsonProcessingException e) {
 			fail("Exception happened: " + e.getMessage());
-		}/*catch (IOException e) {
-			fail("JSON to Object failed: " + e.getMessage());
-		} */
+		} /*
+			 * catch (IOException e) { fail("JSON to Object failed: " +
+			 * e.getMessage()); }
+			 */
 	}
 
-//	@Test
+	// @Test
 	public void testGetWarriorRealmInfo() {
 		fail("Not yet implemented");
 	}
 
-//	@Test
+	// @Test
 	public void testGetWarriorsByKindredId() {
 		fail("Not yet implemented");
 	}
 
-//	@Test
+	// @Test
 	public void testGetWarriorClasses() {
 		fail("Not yet implemented");
 	}
 
-//	@Test
+	// @Test
 	public void testGetTokens() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	@RequiresNonNull({"warriorService", "warriorDAO", "jsonWarriorList"})
+	@RequiresNonNull({ "warriorService", "warriorDAO", "jsonWarriorList" })
 	public void testGetWarriorsByToken() {
 		UriInfo uriInfo = mock(UriInfo.class);
 		MultivaluedMap<String, String> values = new MultivaluedHashMap<>();
