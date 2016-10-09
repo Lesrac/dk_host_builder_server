@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.frick.darklands.daos.WarriorDAO;
 import ch.frick.darklands.daos.impl.JpaWarriorDAO;
+import ch.frick.darklands.data.Profile;
 import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
 import ch.frick.darklands.data.WarriorClass;
@@ -72,6 +73,11 @@ public class WarriorService {
 		if (warrior == null) {
 			LOGGER.warn("Warrior not found, ID: " + id);
 			return Response.serverError().build();
+		}
+		Profile p = warrior.getProfile();
+		if (p != null) {
+			p.getSpecialRules();
+			p.getMiniatures();
 		}
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonWarrior = mapper.writeValueAsString(warrior);

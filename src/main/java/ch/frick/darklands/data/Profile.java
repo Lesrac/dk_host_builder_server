@@ -15,44 +15,44 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
+@SuppressWarnings({ "serial", "initialization.fields.uninitialized" })
 @Entity
-@NamedQueries({
-	@NamedQuery(name="profile.all", query="select p from Profile p")
-}) 
-public class Profile implements Serializable{
+@NamedQueries({ @NamedQuery(name = "profile.all", query = "select p from Profile p") })
+public class Profile implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private int pace;
-	
+
 	private int skill;
-	
+
 	private int might;
-	
+
 	private int constitution;
-	
+
 	private int fortitude;
-	
+
 	private int authority;
-	
+
 	private int temper;
-	
+
 	@ElementCollection
-  @CollectionTable(
-        name="CONST_MARKER",
-        joinColumns=@JoinColumn(name="PROFILE_ID")
-  )
+	@CollectionTable(name = "CONST_MARKER", joinColumns = @JoinColumn(name = "PROFILE_ID"))
 	private List<Integer> constitution_markers;
-	
+
 	@ManyToMany
-	@JoinTable(
-      name="PROFILE_SPECIALRULE",
-      joinColumns=@JoinColumn(name="PROFILE_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="SPECIALRULE_ID", referencedColumnName="ID"))
+	@JoinTable(name = "PROFILE_SPECIALRULE", joinColumns = {
+			@JoinColumn(name = "PROFILE_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "SPECIALRULE_ID", referencedColumnName = "ID") })
 	private List<SpecialRule> specialRules;
+
+	@ManyToMany
+	@JoinTable(name = "PROFILE_MINIATURE", joinColumns = {
+			@JoinColumn(name = "PROFILE_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "MINIATURE_ID", referencedColumnName = "ID") })
+	private List<Miniature> miniatures;
 
 	public Long getId() {
 		return id;
@@ -133,5 +133,13 @@ public class Profile implements Serializable{
 	public void setConstitution_markers(List<Integer> constitution_markers) {
 		this.constitution_markers = constitution_markers;
 	}
-	
+
+	public List<Miniature> getMiniatures() {
+		return miniatures;
+	}
+
+	public void setMiniatures(List<Miniature> miniatures) {
+		this.miniatures = miniatures;
+	}
+
 }

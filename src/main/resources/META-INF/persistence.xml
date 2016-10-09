@@ -12,6 +12,7 @@
 		<class>ch.frick.darklands.data.EquipmentType</class>
 		<class>ch.frick.darklands.data.Kin</class>
 		<class>ch.frick.darklands.data.Kindred</class>
+		<class>ch.frick.darklands.data.Miniature</class>
 		<class>ch.frick.darklands.data.Privilege</class>
 		<class>ch.frick.darklands.data.Profile</class>
 		<class>ch.frick.darklands.data.Realm</class>

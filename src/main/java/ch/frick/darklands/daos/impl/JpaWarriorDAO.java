@@ -20,9 +20,6 @@ public class JpaWarriorDAO extends AbstractManagedDAO<Warrior> implements Warrio
 	public @Nullable Warrior getById(Long id) {
 		EntityManager em = factory.createEntityManager();
 		Warrior find = em.find(Warrior.class, id);
-		if (find != null) {
-			find.getProfile().getSpecialRules().size();
-		}
 		em.close();
 		return find;
 	}
