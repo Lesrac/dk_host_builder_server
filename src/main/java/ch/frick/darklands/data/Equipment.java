@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -19,7 +17,6 @@ import javax.persistence.NamedQuery;
 
 @SuppressWarnings({ "serial", "initialization.fields.uninitialized" })
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({ @NamedQuery(name = "equipment.all", query = "select e from Equipment e") })
 public class Equipment implements Serializable {
 	@Id

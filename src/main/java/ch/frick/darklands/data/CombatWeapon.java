@@ -3,7 +3,6 @@ package ch.frick.darklands.data;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +34,7 @@ public class CombatWeapon implements Serializable {
 
 	private String woundPlus;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "EQUIPMENT_ID", nullable = false)
 	private Equipment equipment;
 

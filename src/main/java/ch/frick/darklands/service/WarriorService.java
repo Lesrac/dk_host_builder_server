@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.frick.darklands.daos.WarriorDAO;
 import ch.frick.darklands.daos.impl.JpaWarriorDAO;
+import ch.frick.darklands.data.CombatWeapon;
+import ch.frick.darklands.data.Equipment;
 import ch.frick.darklands.data.Profile;
 import ch.frick.darklands.data.Token;
 import ch.frick.darklands.data.Warrior;
@@ -73,6 +75,9 @@ public class WarriorService {
 		if (warrior == null) {
 			LOGGER.warn("Warrior not found, ID: " + id);
 			return Response.serverError().build();
+		}
+		for (CombatWeapon cw : warrior.getCombatWeapons()) {
+			Equipment e = cw.getEquipment();
 		}
 		Profile p = warrior.getProfile();
 		if (p != null) {

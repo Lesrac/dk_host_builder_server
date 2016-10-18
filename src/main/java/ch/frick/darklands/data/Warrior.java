@@ -68,8 +68,8 @@ public class Warrior implements Serializable {
 	private Profile profile;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "WARRIOR_EQUIPMENT", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "EQUIPMENT_ID", referencedColumnName = "ID"))
-	private List<Equipment> equipments;
+	@JoinTable(name = "WARRIOR_COMBATWEAPON", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "COMBATWEAPON_ID", referencedColumnName = "ID"))
+	private List<CombatWeapon> combatWeapons;
 
 	@ManyToMany(mappedBy = "warriors", fetch = FetchType.LAZY)
 	private List<WarriorClass> warriorClasses;
@@ -202,14 +202,6 @@ public class Warrior implements Serializable {
 		this.profile = profile;
 	}
 
-	public List<Equipment> getEquipments() {
-		return equipments;
-	}
-
-	public void setEquipments(List<Equipment> equipments) {
-		this.equipments = equipments;
-	}
-
 	public List<WarriorClass> getWarriorClass() {
 		return warriorClasses;
 	}
@@ -248,6 +240,26 @@ public class Warrior implements Serializable {
 
 	public void setUbiquities(Set<WarriorUbiquity> ubiquities) {
 		this.ubiquities = ubiquities;
+	}
+
+	public List<CombatWeapon> getCombatWeapons() {
+		return combatWeapons;
+	}
+
+	public void setCombatWeapons(List<CombatWeapon> combatWeapons) {
+		this.combatWeapons = combatWeapons;
+	}
+
+	public List<WarriorClass> getWarriorClasses() {
+		return warriorClasses;
+	}
+
+	public void setWarriorClasses(List<WarriorClass> warriorClasses) {
+		this.warriorClasses = warriorClasses;
+	}
+
+	public void setSellsword(boolean isSellsword) {
+		this.isSellsword = isSellsword;
 	}
 
 }

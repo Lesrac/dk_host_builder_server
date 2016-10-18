@@ -8,6 +8,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,6 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.frick.darklands.daos.WarriorDAO;
 import ch.frick.darklands.data.Acuity;
+import ch.frick.darklands.data.CombatWeapon;
 import ch.frick.darklands.data.Kin;
 import ch.frick.darklands.data.Kindred;
 import ch.frick.darklands.data.Privilege;
@@ -100,7 +102,7 @@ public class TestWarriorService {
 		ubiquities.add(new WarriorUbiquity(warrior, u, r, 1));
 
 		warrior.setUbiquities(ubiquities);
-
+		warrior.setCombatWeapons(new ArrayList<CombatWeapon>());
 		warriors.add(warrior);
 		warriors.add(new Warrior("Naraa", k1, 2, 1, 1, 30, 154, "Naraa", false));
 		warriors.add(new Warrior("Warrior of Baalor", k1, 2, 1, 20, 30, 21, "W of WB", false));
