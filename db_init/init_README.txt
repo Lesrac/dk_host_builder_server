@@ -18,6 +18,10 @@ Create DB (Postgres - PostgreSQL\9.6\bin>psql -U postgres darklands_host_builder
 \copy profile_specialrule(PROFILE_ID,SPECIALRULE_ID) FROM '/path/to/csv/Profile_Specialrules.csv' DELIMITER ',' CSV
 \copy miniature(ID,articlenumber,image,link,name) FROM '/path/to/csv/Miniatures.csv' DELIMITER ',' CSV
 \copy profile_miniature(PROFILE_ID,MINIATURE_ID) FROM '/path/to/csv/Miniature_Profile.csv' DELIMITER ',' CSV
+\copy equipmenttype(ID,NAME) FROM '/path/to/csv/EquipmentTypes.csv' DELIMITER ',' CSV
+\copy equipmentclass(ID,NAME) FROM '/path/to/csv/EquipmentClasses.csv' DELIMITER ',' CSV
+\copy equipment(ID,NAME,OPTION,EQUIPMENT_TYPE_ID,HANDS,EQUIPMENT_CLASS_ID,COST) FROM '/path/to/csv/Equipments.csv' DELIMITER ',' CSV
+\copy combatweapon(ID,ATTACKDICE,WEAPONPLUS,MANDW,ATTACKRANGE,CHARGEPLUS,MANDWANDCH,WOUNDPLUS,EQUIPMENT_ID) FROM '/path/to/csv/CombatWeapons.csv' DELIMITER ',' CSV
 
 Warrior.csv:
 id/name/spelling/kindred/Privilege/Acuity/Hands/UnitSizeMin/UnitSizeMax/BaseSize/Cost/Profile_ID

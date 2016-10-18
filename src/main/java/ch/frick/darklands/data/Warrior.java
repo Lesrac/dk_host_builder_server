@@ -21,7 +21,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
+@SuppressWarnings({ "serial", "initialization.fields.uninitialized" })
 @Entity
 @NamedQueries({ @NamedQuery(name = "warrior.all", query = "select w from Warrior w"),
 		@NamedQuery(name = "warrior.byKindred", query = "select w from Warrior w where w.kindred.id = :kindred_id") })
@@ -67,11 +67,11 @@ public class Warrior implements Serializable {
 	@JoinColumn(name = "PROFILE_ID")
 	private Profile profile;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "WARRIOR_EQUIPMENT", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "EQUIPMENT_ID", referencedColumnName = "ID"))
 	private List<Equipment> equipments;
 
-	@ManyToMany(mappedBy = "warriors")
+	@ManyToMany(mappedBy = "warriors", fetch = FetchType.LAZY)
 	private List<WarriorClass> warriorClasses;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -82,11 +82,11 @@ public class Warrior implements Serializable {
 	@JoinColumn(name = "ACUITY_ID", nullable = false)
 	private Acuity acuity;
 
-	@OneToMany(mappedBy = "warrior")
+	@OneToMany(mappedBy = "warrior", fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private Set<WarriorUbiquity> ubiquities;
 
-	@ManyToMany(mappedBy = "warriors")
+	@ManyToMany(mappedBy = "warriors", fetch = FetchType.LAZY)
 	private List<Token> tokens;
 
 	public Warrior() {

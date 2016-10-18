@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -15,37 +17,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-@SuppressWarnings({"serial", "initialization.fields.uninitialized"})
+@SuppressWarnings({ "serial", "initialization.fields.uninitialized" })
 @Entity
-@NamedQueries({
-	@NamedQuery(name="equipment.all", query="select e from Equipment e")
-})
-public class Equipment implements Serializable{
+@Inheritance(strategy = InheritanceType.JOINED)
+@NamedQueries({ @NamedQuery(name = "equipment.all", query = "select e from Equipment e") })
+public class Equipment implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	private String name;
-	
+
 	private int hands;
-	
+
 	private boolean option;
-	
+
 	private int cost;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="EQUIPMENT_CLASS_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "EQUIPMENT_CLASS_ID", nullable = false)
 	private EquipmentClass equipmentClass;
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-  @JoinColumn(name="EQUIPMENT_TYPE_ID", nullable = false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "EQUIPMENT_TYPE_ID", nullable = false)
 	private EquipmentType equipmentType;
-	
+
 	@ManyToMany
-  @JoinTable(
-      name="EQUIPMENT_EQUIPMENTRULE",
-      joinColumns=@JoinColumn(name="EQUIPMENT_ID", referencedColumnName="ID"),
-      inverseJoinColumns=@JoinColumn(name="EQUIPMENTRULE_ID", referencedColumnName="ID"))
+	@JoinTable(name = "EQUIPMENT_EQUIPMENTRULE", joinColumns = @JoinColumn(name = "EQUIPMENT_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "EQUIPMENTRULE_ID", referencedColumnName = "ID"))
 	private List<EquipmentRule> equipmentRules;
 
 	public Long getId() {
@@ -111,6 +109,5 @@ public class Equipment implements Serializable{
 	public void setEquipmentRules(List<EquipmentRule> equipmentRules) {
 		this.equipmentRules = equipmentRules;
 	}
-	
-	
+
 }
