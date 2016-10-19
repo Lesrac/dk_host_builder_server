@@ -3,7 +3,6 @@ package ch.frick.darklands.data;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,11 +19,11 @@ public class ShotWeapon implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private int dice;
+	private int shootDice;
 
-	private int weaponPlus;
+	private String gazeDamage;
 
-	private int mAndW;
+	private String glanceDamage;
 
 	private int minimumRange;
 
@@ -36,32 +35,32 @@ public class ShotWeapon implements Serializable {
 
 	private String woundPlus;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "EQUIPMENT_ID", nullable = false)
 	private Equipment equipment;
 
-	public int getDice() {
-		return dice;
+	public int getShootDice() {
+		return shootDice;
 	}
 
-	public void setDice(int dice) {
-		this.dice = dice;
+	public void setShootDice(int dice) {
+		this.shootDice = dice;
 	}
 
-	public int getWeaponPlus() {
-		return weaponPlus;
+	public String getGazeDamage() {
+		return gazeDamage;
 	}
 
-	public void setWeaponPlus(int weaponPlus) {
-		this.weaponPlus = weaponPlus;
+	public void setGazeDamage(String gazeDamage) {
+		this.gazeDamage = gazeDamage;
 	}
 
-	public int getmAndW() {
-		return mAndW;
+	public String getGlanceDamage() {
+		return glanceDamage;
 	}
 
-	public void setmAndW(int mAndW) {
-		this.mAndW = mAndW;
+	public void setGlanceDamage(String glanceDamage) {
+		this.glanceDamage = glanceDamage;
 	}
 
 	public int getMinimumRange() {

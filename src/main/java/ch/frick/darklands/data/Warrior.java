@@ -67,9 +67,17 @@ public class Warrior implements Serializable {
 	@JoinColumn(name = "PROFILE_ID")
 	private Profile profile;
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "WARRIOR_COMBATWEAPON", joinColumns = @JoinColumn(name = "WARRIOR_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "COMBATWEAPON_ID", referencedColumnName = "ID"))
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "WARRIOR_ID")
 	private List<CombatWeapon> combatWeapons;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "WARRIOR_ID")
+	private List<ShotWeapon> shotWeapons;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "WARRIOR_ID")
+	private List<Armour> armours;
 
 	@ManyToMany(mappedBy = "warriors", fetch = FetchType.LAZY)
 	private List<WarriorClass> warriorClasses;
@@ -248,6 +256,22 @@ public class Warrior implements Serializable {
 
 	public void setCombatWeapons(List<CombatWeapon> combatWeapons) {
 		this.combatWeapons = combatWeapons;
+	}
+
+	public List<ShotWeapon> getShotWeapons() {
+		return shotWeapons;
+	}
+
+	public void setShotWeapons(List<ShotWeapon> shotWeapons) {
+		this.shotWeapons = shotWeapons;
+	}
+
+	public List<Armour> getArmours() {
+		return armours;
+	}
+
+	public void setArmours(List<Armour> armours) {
+		this.armours = armours;
 	}
 
 	public List<WarriorClass> getWarriorClasses() {

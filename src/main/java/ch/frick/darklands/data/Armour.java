@@ -3,7 +3,6 @@ package ch.frick.darklands.data;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,13 +19,13 @@ public class Armour implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private int number;
+	private int armourPlus;
 
 	private int cAndA;
 
 	private String woundMinus;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "EQUIPMENT_ID", nullable = false)
 	private Equipment equipment;
 
@@ -38,12 +37,12 @@ public class Armour implements Serializable {
 		this.id = id;
 	}
 
-	public int getNumber() {
-		return number;
+	public int getArmourPlus() {
+		return armourPlus;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setArmourPlus(int number) {
+		this.armourPlus = number;
 	}
 
 	public int getcAndA() {
